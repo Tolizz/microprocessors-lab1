@@ -8,7 +8,8 @@ extern int bonus(char *pin);
 
 int main(){
 	
-	char pin[] = "A9b3";
+	char pin[] = "A9d3";
+	char pin2[] = "Afe23falhav.afe??ef";
 	printf("Pin is: %s\n", pin); // test pin and printf
 	
 	int hash, level, final_pin, checksum;
@@ -31,6 +32,31 @@ int main(){
 	c_level = c_clearance_level(hash);
 	c_final_pin = c_lucas(c_level);
 	c_checksum = c_bonus(pin);
+	printf("Expected outputs from testbench:\n");
+	printf("c_hash: %d\n",c_hash);
+	printf("c_level: %d\n",c_level);
+	printf("c_final_pin: %d\n",c_final_pin);
+	printf("c_checksum: 0x%X\n\n",c_checksum);
+
+	// pin 2;
+	
+	hash = access_hash(pin2);
+	printf("Hash: %d\n", hash);
+	
+	level = clearance_level(hash);
+	printf("Clearance level is %d\n", level);
+	
+	final_pin = lucas(level);
+	printf("Final unlock pin is: %d\n", final_pin);
+	
+	checksum = bonus(pin2);
+	printf("Checksum of initial pin: 0x%X\n\n", checksum);
+	
+	//testbench 2
+	c_hash = c_access_hash(pin2);
+	c_level = c_clearance_level(hash);
+	c_final_pin = c_lucas(c_level);
+	c_checksum = c_bonus(pin2);
 	printf("Expected outputs from testbench:\n");
 	printf("c_hash: %d\n",c_hash);
 	printf("c_level: %d\n",c_level);
